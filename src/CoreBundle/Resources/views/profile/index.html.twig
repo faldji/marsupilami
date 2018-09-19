@@ -1,0 +1,22 @@
+{% extends 'CoreBundle:profile:layout.html.twig' %}
+
+
+{% block main %}
+    <div class="container">
+
+        <h3 class="text-center text-info"> Mes informations </h3>
+        {% for msg in app.flashes('notice_success') %}
+            <div class="alert alert-success alert-dismissible">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <strong>{{ msg }}
+                </strong>
+            </div>
+        {% endfor %}
+        <ul class="list-group">
+            <li class="list-group-item">Age: {% if app.user.age != null %} {{ app.user.age }} {% endif %}</li>
+            <li class="list-group-item">Famille : {% if app.user.famille != null %} {{ app.user.famille }} {% endif %}</li>
+            <li class="list-group-item">Race : {% if app.user.race != null %} {{ app.user.race }} {% endif %}</li>
+            <li class="list-group-item">Nourriture: {% if app.user.nourriture != null %} {{ app.user.nourriture }} {% endif %}</li>
+        </ul>
+    </div>
+{% endblock %}

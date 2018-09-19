@@ -1,0 +1,13 @@
+{% extends 'CoreBundle::layout.html.twig' %}
+{% block menu %}
+  <nav class="site-header sticky-top py-1 bg-dark">
+    <div class="container d-flex flex-column flex-md-row justify-content-between">
+      <a class="py-2" href="#">
+      MARSUPILAMI</a>
+      <a class="py-2 d-none d-md-inline-block" href="{{ path("marsupilami_core_after_login") }}">Mon profil</a>
+      <a class="py-2 d-none d-md-inline-block" href="{{ path("marsupilami_core_profile_edit") }}">Modifier mes informations</a>
+      <a class="py-2 d-none d-md-inline-block" href="{{ path("marsupilami_core_add_friend") }}">Carnet adresse</a>
+      <a class="py-2 d-none d-md-inline-block" href="{{ path("fos_user_security_logout") }}">Deconnexion</a>
+    </div>
+  </nav>
+{% endblock %}

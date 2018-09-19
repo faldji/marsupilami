@@ -1,0 +1,57 @@
+{% extends 'CoreBundle:profile:layout.html.twig' %}
+
+
+{% block main %}
+  <div class="container">
+    <h3 class="text-center text-info"> Mon carnet d'adresses </h3>
+      {% for msg in app.flashes('notice_error') %}
+        <div class="alert alert-danger alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>{{ msg }}
+          </strong>
+        </div>
+      {% endfor %}
+
+      {% for msg in app.flashes('notice_success') %}
+        <div class="alert alert-success alert-dismissible">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+          <strong>{{ msg }}
+          </strong>
+        </div>
+      {% endfor %}
+
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+          <h5 class="text-center text-info"> Ajouter un nouveau marsupilami dans le carnet d'adresse </h5>
+          {{ form_start(form) }}
+        <div class="form-group row">
+          <label class="col-md-4">Nom d'utilisateur</label>
+            {{ form_widget(form.tmpFriend, {'attr': {'class': 'form-control col-md-8'}}) }}
+        </div>
+
+        <div class="form-group row">
+          <input type="submit" value="Ajouter" class="btn btn-success col-md-4 offset-md-4">
+        </div>
+          {{ form_end(form) }}
+      </div>
+    </div>
+    <hr class="bg-info">
+    <table class="table">
+      <caption>Liste de mes amis marsupilami</caption>
+      <thead class="bg-info">
+        <tr>
+          <th>Email </th><th>Nom d'utilisateur</th><th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for usr in app.user.myFriends %}
+            <tr>
+              <td>{{ usr.email }}</td>
+              <td>{{ usr.username }}</td>
+              <td><a class="btn btn-danger" href="{{ path('marsupilami_core_remove_friend', {'id': usr.id }) }}">Supprimer</a></td>
+            </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock %}

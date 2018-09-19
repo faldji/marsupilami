@@ -1,0 +1,10 @@
+core_homepage:
+    path:     /
+    defaults: { _controller: CoreBundle:Default:index }
+
+marsupilami_core_after_login:
+    path:     /marsupilami/profile
+    defaults: { _controller: CoreBundle:Default:profile }
+#core_homepage:
+#    path:     /
+#    defaults: { _controller: CoreBundle:Default:index }

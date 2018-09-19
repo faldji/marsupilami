@@ -1,0 +1,24 @@
+core_homepage:
+    path:     /
+    defaults: { _controller: CoreBundle:Default:index }
+
+marsupilami_core_after_login:
+    path:     /marsupilami/profile
+    defaults: { _controller: CoreBundle:Default:profile }
+
+marsupilami_core_profile_edit:
+    path:     /marsupilami/profile/edit
+    defaults: { _controller: CoreBundle:Default:edit }
+
+marsupilami_core_add_friend:
+    path:     /marsupilami/carnet-adresse/
+    defaults: { _controller: CoreBundle:Default:carnetAdresse }
+
+marsupilami_core_remove_friend:
+    path:     /marsupilami/carnet-adresse/supprimer/{id}
+    defaults: { _controller: CoreBundle:Default:carnetAdresseSupprimer }
+    requirements:
+        id: \d+
+#core_homepage:
+#    path:     /
+#    defaults: { _controller: CoreBundle:Default:index }
