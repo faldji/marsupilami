@@ -3,6 +3,7 @@
 namespace CoreBundle\Entity;
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -24,7 +25,16 @@ class User extends BaseUser
      * @var int
      *
      * @ORM\Column(name="age", type="integer", nullable=true)
+     * @Assert\NotBlank(message="Entrer votre age.", groups={"Registration", "Profile"})
+     * @Assert\Range(
+     *     min=1,
+     *     max=10,
+     *     minMessage="essaye encore.",
+     *     maxMessage="aucun marsupilami ne peut avoir cet age.",
+     *     groups={"Registration", "Profile"}
+     * )
      */
+
     private $age;
 
     /**
@@ -50,12 +60,16 @@ class User extends BaseUser
 
     /**
      * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\User", mappedBy="myFriends")
+     *
      */
     private $friendsWithMe;
 
     /**
      * @ORM\ManyToMany(targetEntity="CoreBundle\Entity\User", inversedBy="friendsWithMe")
-     * @ORM\JoinTable(name="carnetAdresse")
+     * @ORM\JoinTable(name="carnetAdresse",
+     *      joinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="carnetAdresse_user_id", referencedColumnName="id")}
+     *      )
      */
     private $myFriends;
 
