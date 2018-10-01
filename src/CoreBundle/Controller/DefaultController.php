@@ -53,9 +53,9 @@ class DefaultController extends Controller
 
     public function carnetAdresseAction(Request $request)
     {
-        $utilisateur = $this->getUser();
 
-        $form = $this->createForm(CarnetType::class, $utilisateur);
+        $utilisateur =$this->getUser();
+        $form = $this->createForm(CarnetType::class,  $utilisateur);
 
         if($request->isMethod('POST'))
         {
@@ -63,15 +63,19 @@ class DefaultController extends Controller
 
             if($form->isSubmitted() && $form->isValid())
             {
-                $utilisateur->addMyFriend($utilisateur->getTmpFriend());
-                $utilisateur->addFriendsWithMe($utilisateur->getTmpFriend());
+                if($utilisateur->addMyFriend($utilisateur->getTmpFriend())){
 
-                $this->getDoctrine()->getManager()->flush();
-                $request->getSession()->getFlashBag()->add('notice_success', 'Le nouveau contact a bien été ajouté');
+                    $utilisateur->addFriendsWithMe($utilisateur->getTmpFriend());
+
+                    $this->getDoctrine()->getManager()->flush();
+                    $request->getSession()->getFlashBag()->add('notice_success', 'Le nouveau contact a bien été ajouté');
+                }else{
+                    $request->getSession()->getFlashBag()->add('notice_error', 'Ce contact existe déjà dans vos amis');
+                }
             }
             else
             {
-                $request->getSession()->getFlashBag()->add('notice_error', 'Le formulaire est mal rempli');
+                $request->getSession()->getFlashBag()->add('notice_error', 'Ajout impossible');
             }
         }
 

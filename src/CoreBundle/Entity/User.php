@@ -231,6 +231,11 @@ class User extends BaseUser
      */
     public function addMyFriend(\CoreBundle\Entity\User $myFriend)
     {
+        foreach ($this->myFriends as $item) {
+            if ($item == $myFriend){
+                return 0;
+            }
+        }
         $this->myFriends[] = $myFriend;
 
         return $this;
@@ -273,4 +278,5 @@ class User extends BaseUser
     {
         $this->tmpFriend = $tmpFriend;
     }
+
 }
